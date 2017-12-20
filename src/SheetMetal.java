@@ -6,16 +6,18 @@
  * Created: 12/14/17
  */
 
+import java.text.DecimalFormat;
+
 public class SheetMetal implements Part{
 
 
-    public static double LBS_MULTIPLIER = 0.1;      //read only
+    public static final double LBS_MULTIPLIER = 0.1;      //read only
 
     private double lengthInches;
 
     private double thicknessInches;
 
-    private static double USD_MULTIPLIER = 0.50;
+    private static final double USD_MULTIPLIER = 0.50;
 
     private double widthInches;
 
@@ -47,16 +49,19 @@ public class SheetMetal implements Part{
 
     public void printBillOfMaterials(){
 
+        DecimalFormat costFormat = new DecimalFormat("#0.00");
+        DecimalFormat weightFormat = new DecimalFormat(("##.###"));
+
         StringBuilder builder = new StringBuilder();
 
         builder.append("==========================\n");
-        builder.append(getName());
+        builder.append(getName() + "\n");
         builder.append("==========================\n");
         builder.append("Length: " + lengthInches + " inches\n");
         builder.append("Width: " + widthInches + " inches\n");
         builder.append("Thickness: " + thicknessInches + " inches\n");
-        builder.append("Cost: $" + getCost() + "\n");
-        builder.append("Weight: " + getWeight() + " lbs\n");
+        builder.append("Cost: $" + costFormat.format(getCost()) + "\n");
+        builder.append("Weight: " + weightFormat.format(getWeight()) + " lbs\n");
 
         System.out.println(builder.toString());
 
